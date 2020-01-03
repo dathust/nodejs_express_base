@@ -23,7 +23,12 @@ class UserController {
 
     getUserById(userId) {
         // validate user
-        console.log(userId);
+        try {
+            return userId
+        } catch (error) {
+            // log
+            //handle error
+        }
         //TODO
     }
 }
