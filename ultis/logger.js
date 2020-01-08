@@ -4,11 +4,11 @@ const path = require('path')
 const LEVEL = Symbol.for('level')
 
 function filterOnly(level) {
-    return winston.format(function (info) {
-        if (info[LEVEL] === level) {
-            return info;
-        }
-    })();
+        return winston.format(function (info) {
+            if (info[LEVEL] === level) {
+                return info;
+            }
+        })()
 }
 
 const logger = new (winston.createLogger)({

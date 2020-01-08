@@ -9,10 +9,16 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/create', async (req, res) => {
-  let user = req.body.user
+  let username = req.body.username
+  let phone = req.body.phone
   try {
+    logger.info(`create user ${username}`)    
+    let user = {
+      username: username,
+      phone: phone
+    }    
     let result = await userController.createUser(user)
-    return res.send(result)
+    return res.send(user)
   } catch (error) {
     logger.error('log error in here')
     return res.sendStatus(500)
@@ -25,6 +31,18 @@ router.get('/getUserById/:user_id', async (req, res) => {
     let result = await userController.getUserById(userId)
     logger.info(`log info in here: ${userId}`)
     return res.send(result || 'ok')
+  } catch (error) {
+    logger.error('log error in here')
+    return res.sendStatus(500)
+  }
+})
+
+router.get('/getListUser', async (req, res) => {  
+  let userId = req.query.user_id
+  try {
+    console.log('=======>userId: ', userId)
+    logger.info(`log info in here: ${userId}`)
+    return res.send(userId || 'ok')
   } catch (error) {
     logger.error('log error in here')
     return res.sendStatus(500)
